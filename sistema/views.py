@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 # Cadastrar, editar e excluir pessoas
-def cadastro_pessoa(request):
+def cadastrar_membro(request):
 	if request.method == 'GET':
 		pessoa_form = PessoaForm()
 	if request.method == 'POST':
@@ -21,13 +21,13 @@ def cadastro_pessoa(request):
 		if pessoa_form.is_valid():
 			pessoa_form.save()
 			sucesso = True
-			return HttpResponseRedirect('/cadastro_pessoa/')
+			return HttpResponseRedirect('/cadastrar_membro/')
 		else:
 			dados_incorretos = True
-			return render(request, 'cadastro_pessoa.html', locals())
-	return render(request, 'cadastro_pessoa.html', locals())
+			return render(request, 'cadastrar_membro.html', locals())
+	return render(request, 'cadastrar_membro.html', locals())
 
-def editar_pessoa(request, id_pessoa):
+def editar_membro(request, id_pessoa):
 	objeto = Pessoa.objects.get(id = id_pessoa)
 	if request.method == 'GET':
 		pessoa_form = PessoaForm(instance = objeto)
@@ -36,21 +36,21 @@ def editar_pessoa(request, id_pessoa):
 		if pessoa_form.is_valid():
 			pessoa_form.save()
 			sucesso = True
-			return HttpResponseRedirect('/editar_pessoa/%s' %id_pessoa)
+			return HttpResponseRedirect('/editar_membro/%s' %id_pessoa)
 		else:
 			dados_incorretos = True
-			return render(request, 'editar_pessoa.html', locals())
-	return render(request, 'editar_pessoa.html', locals())
+			return render(request, 'editar_membro.html', locals())
+	return render(request, 'editar_membro.html', locals())
 
-def visualizar_pessoas (request):
+def visualizar_membros(request):
     pessoas = Pessoa.objects.all()
-    return render(request, 'visualizar_pessoas.html', locals())
+    return render(request, 'visualizar_membros.html', locals())
 
-def excluir_pessoa(request, id_pessoa):
+def excluir_membro(request, id_pessoa):
 	objeto = Pessoa.objects.get(id = id_pessoa)
 	objeto.delete()
 	messages.success(request, 'O cadastro foi deletado')
-	return HttpResponseRedirect('/visualizar_pessoas/')
+	return HttpResponseRedirect('/visualizar_membros/')
 
 def home(request):
 	return render(request, 'home.html', locals())
