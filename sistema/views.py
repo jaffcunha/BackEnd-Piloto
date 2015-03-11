@@ -11,6 +11,7 @@ import os
 from os import path
 from django.contrib.auth import authenticate, login, logout
 
+
 # Create your views here.
 # Cadastrar, editar e excluir pessoas
 def cadastrar_membro(request):
@@ -73,3 +74,30 @@ def login(request):
 def logout(request):
 	auth.logout(request)
 	return HttpResponseRedirect('/login/')
+
+# Inicio da implementacao/teste do Custom Lookup
+
+def implementacao_lookup_exact(request):
+
+	# Nessa parte irei testar o filtro quando procuro uma palavra
+	# exatamente como ela esta escrita, utilizando o __exact.
+
+    pessoas = Pessoa.objects.filter(cargo__exact = "docente")
+    return render(request, 'visualizar_membros.html', locals())
+
+def implementacao_lookup_iexact(request):
+
+    # Nessa parte irei testar o filtro quando procuro umsa palavra
+    # mas que nao necessariamente estao todas iguaisl, utilizando o __iexact.
+
+    pessoas = Pessoa.objects.filter(cargo__iexact = "docente")
+    return render(request, 'visualizar_membros.html', locals())
+
+def implementacao_custom_lookup(request):
+	# Nessa parte irei testar o filtro com um custom lookup
+	# Leia atentamente os passos para se utilizar o custom lookup na documentacao
+	# Primeiramente na models implementa-se o codigo
+	# Depois avisamos o Django sobre ele
+
+	pessoas = Pessoa.objects.filter(idade__func = "17")
+	return render(request, 'visualizar_membros.html', locals())

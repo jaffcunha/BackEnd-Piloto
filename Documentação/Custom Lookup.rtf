@@ -167,6 +167,7 @@ django.db.models.fields\cf4 \expnd0\expndtw0\kerning0
  \cf2 \expnd0\expndtw0\kerning0
 import\cf4 \expnd0\expndtw0\kerning0
  Field\
+#c\'f3digo\
 Field\cf6 \expnd0\expndtw0\kerning0
 .\cf4 \expnd0\expndtw0\kerning0
 register_lookup(Funcao)\
@@ -248,8 +249,9 @@ return\cf4 \expnd0\expndtw0\kerning0
 \b que na importa\'e7\'e3o agora n\'e3o usamos mais \'93Lookup\'94 e sim \'93Transform\'94.\
 \
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b0 Esse lookup est\'e1 retornando \'93ABS(%s)\'94. \'c9 o uso de uma fun\'e7\'e3o j\'e1 existente no Django para converter o valor obtido para absoluto a fim de poder fazer a compara\'e7\'e3o.\
+\b0 \cf0 Esse lookup est\'e1 retornando \'93ABS(%s)\'94. \'c9 o uso de uma fun\'e7\'e3o j\'e1 existente no Django para converter o valor obtido para absoluto a fim de poder fazer a compara\'e7\'e3o.\
 \
 Agora iremos \'93avisar\'94 (registrar) o Django sobre a implementa\'e7\'e3o:\
 \
@@ -268,11 +270,13 @@ register_lookup(AbsoluteValue)\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b * Note que nesse caso usamos o IntegerField pois sabemos que iremos registrar um valor inteiro.\
+\b \cf0 * Note que nesse caso usamos o IntegerField pois sabemos que iremos registrar um valor inteiro.\
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\b0 Dessa maneira, j\'e1 podemos utilizar o c\'f3digo \'93Experiment.objects.filter(variacao__abs=27)\'94 que ir\'e1 nos retornar os experimentos que possuem varia\'e7\'e3o igual a 27. Contudo, queremos igual 
+\b0 \cf0 Dessa maneira, j\'e1 podemos utilizar o c\'f3digo \'93Experiment.objects.filter(variacao__abs=27)\'94 que ir\'e1 nos retornar os experimentos que possuem varia\'e7\'e3o igual a 27. Contudo, queremos igual 
 \b ou menor
 \b0  que 27. Logo, iremos utilizar um lookup j\'e1 existente para dizer que tamb\'e9m estamos interessados nos valores menores que 27. Esse lookup \'e9 chamado da seguinte maneira: __lt.\
 \
