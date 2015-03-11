@@ -79,7 +79,7 @@ def logout(request):
 
 def implementacao_lookup_exact(request):
 
-	# Nessa parte irei testar o filtro quando procuro uma palavra
+	# Irei testar o filtro quando procuro uma palavra
 	# exatamente como ela esta escrita, utilizando o __exact.
 
     pessoas = Pessoa.objects.filter(cargo__exact = "docente")
@@ -87,17 +87,28 @@ def implementacao_lookup_exact(request):
 
 def implementacao_lookup_iexact(request):
 
-    # Nessa parte irei testar o filtro quando procuro umsa palavra
+    # Irei testar o filtro quando procuro uma palavra
     # mas que nao necessariamente estao todas iguaisl, utilizando o __iexact.
 
     pessoas = Pessoa.objects.filter(cargo__iexact = "docente")
     return render(request, 'visualizar_membros.html', locals())
 
 def implementacao_custom_lookup(request):
-	# Nessa parte irei testar o filtro com um custom lookup
+
+	# Irei testar o filtro com um custom lookup
 	# Leia atentamente os passos para se utilizar o custom lookup na documentacao
 	# Primeiramente na models implementa-se o codigo
 	# Depois avisamos o Django sobre ele
 
 	pessoas = Pessoa.objects.filter(idade__func = "17")
+	return render(request, 'visualizar_membros.html', locals())
+
+# Inicio da implementacao/teste da Transformacao
+
+def implementacao_transformacao(request):
+
+	# Irei testar o filtro com uma transformacao que ira me dar
+	# todos os membros cadastrados com idade < 18 anos.
+
+	pessoas = Pessoa.objects.filter(idade__idmenor__lt = "18")
 	return render(request, 'visualizar_membros.html', locals())

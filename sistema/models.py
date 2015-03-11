@@ -6,8 +6,14 @@ from django.db.models.signals import post_save
 # Importacao para utilizar o custom lookup
 from django.db.models import Lookup
 
-#Avisando o Django sobre a implementacao do custom lookup
+# Avisando o Django sobre a implementacao do custom lookup
 from django.db.models.fields import Field
+
+# Importacao para utilizar a transformacao
+from django.db.models import Transform
+
+# Avisando o Django sobre a implementacao da transformacao
+from django.db.models import IntegerField
 
 # Create your models here.
 
@@ -32,5 +38,19 @@ class Funcao(Lookup):
         print params
         return '%s <> %s' % (lhs, rhs), params
 
-
+# Avisando o Django sobre a implementacao do custom lookup
 Field.register_lookup(Funcao)
+
+# Codigo da implementacao de uma transformacao
+# foram feitas algumas alteracoes da documentacao
+# para se adequar ao template
+
+class IdadeMenor(Transform):
+    lookup_name = 'idmenor'
+
+    def as_sql(self, qn, connection):
+        lhs, params = qn.compile(self.lhs)
+        return "ABS(%s)" % lhs, params
+
+# Avisando o Django sobre a implementacao da transformacao
+IntegerField.register_lookup(IdadeMenor)
